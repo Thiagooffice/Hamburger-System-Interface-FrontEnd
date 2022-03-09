@@ -24,6 +24,11 @@ export const ContainerItens = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
   img {
     margin-top: 2vh;
     height: 85px;
