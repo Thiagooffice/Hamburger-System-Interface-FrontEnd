@@ -18,16 +18,25 @@ import {
   ErrorMessage
 } from './styles'
 
+const lowercase = /(?=.*[a-z])/
+const uppercase = /(?=.*[A-Z])/
+const numeric = /(?=.*[0-9])/
+const specialCharacter = /(?=.*[!@#$%^&*])/
+
 const schema = Yup.object().shape({
   name: Yup.string('O seu nome é obrigatório').required('O nome é obrigatório'),
   email: Yup.string()
     .email('Digite um e-mail válido')
     .required('O e-mail é obrigatório'),
   password: Yup.string()
-    .required('A senha é obrigatória')
-    .min(6, 'A senha deve ter no mínimo 6 dígitos'),
+    .required('Senha obrigatório!')
+    .min(8, 'Minimo 8 caracteres obrigatorio')
+    .matches(uppercase, 'É obrigatório letra maiúscula')
+    .matches(lowercase, 'É obrigatório letra minúscula')
+    .matches(numeric, 'É obrigatório um número')
+    .matches(specialCharacter, 'É obrigatório um caractere especial'),
   confirmPassword: Yup.string()
-    .required('A senha é obrigatória')
+    .required('Confirmar senha é obrigatório')
     .oneOf([Yup.ref('password')], 'As senhas devem ser iguais')
 })
 
