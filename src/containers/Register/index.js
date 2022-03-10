@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -29,7 +30,7 @@ const schema = Yup.object().shape({
     .email('Digite um e-mail válido')
     .required('O e-mail é obrigatório'),
   password: Yup.string()
-    .required('Senha obrigatório!')
+    .required('Senha obrigatório')
     .min(8, 'Minimo 8 caracteres obrigatorio')
     .matches(uppercase, 'É obrigatório letra maiúscula')
     .matches(lowercase, 'É obrigatório letra minúscula')
@@ -50,11 +51,32 @@ export default function Register() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('users', {
-      name: clientData.name,
-      email: clientData.email,
-      password: clientData.password
-    })
+    try {
+      // const response = await api.post('users', {
+      //   name: clientData.name,
+      //   email: clientData.email,
+      //   password: clientData.password
+      // })
+      toast.success('Cadastro criado com sucesso', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    } catch (error) {
+      toast.error('🦄 Wow so easy!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    }
   }
 
   return (

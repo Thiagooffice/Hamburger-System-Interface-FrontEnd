@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -22,9 +23,7 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Digite um e-mail válido')
     .required('O e-mail é obrigatório'),
-  password: Yup.string()
-    .required('A senha é obrigatória')
-    .min(6, 'A senha deve ter no mínimo 6 dígitos')
+  password: Yup.string().required('A senha é obrigatória')
 })
 
 export default function Login() {
@@ -37,10 +36,31 @@ export default function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('sessions', {
-      email: clientData.email,
-      password: clientData.password
-    })
+    try {
+      // const response = await api.post('sessions', {
+      //   email: clientData.email,
+      //   password: clientData.password
+      // })
+      toast.success('🦄 Wow so easy!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    } catch (error) {
+      toast.error('Deu ruim!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    }
   }
 
   return (
