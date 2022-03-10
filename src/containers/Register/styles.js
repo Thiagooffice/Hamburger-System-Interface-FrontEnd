@@ -12,12 +12,12 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `
-export const LoginImage = styled.img`
-  height: 70%;
+export const RegisterImage = styled.img`
+  height: 80%;
 `
 export const ContainerItens = styled.div`
   padding: 45px;
-  height: 70%;
+  height: 80%;
   background: #373737;
   border-radius: 0 10px 10px 0;
   display: flex;
@@ -30,8 +30,7 @@ export const ContainerItens = styled.div`
   }
 
   img {
-    margin-top: 2vh;
-    height: 85px;
+    height: 80px;
   }
 
   h1 {
@@ -52,7 +51,7 @@ export const Label = styled.p`
   font-size: 12px;
   line-height: 14px;
   color: #ffffff;
-  margin-top: 12px;
+  margin-top: ${props => (props.error ? '1px' : '10px')};
   margin-bottom: 5px;
 `
 export const Input = styled.input`
@@ -71,6 +70,7 @@ export const SignInLink = styled.p`
   line-height: 16px;
   color: #ffffff;
   text-align: center;
+  margin-top: 15px;
 
   a {
     text-decoration: underline;
